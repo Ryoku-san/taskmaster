@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskMaster</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/task.png">
+</head>
+<body>
+  <h1>TaskMaster</h1>
+  <form id="taskForm">
+    <input type="text" id="title" placeholder="Task Title" required><br>
+    <input type="datetime-local" id="time" required><br>
+    <label><input type="checkbox" id="reminder"> Set Reminder</label><br>
+    <button type="submit">Add Task</button>
+  </form>
+  <ul id="taskList"></ul>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
