@@ -1,8 +1,12 @@
 /* Classic Font and Base Layout */
 body {
   font-family: 'Georgia', serif;
-  background-color: #f8f9fa;
-  color: #003049;
+  background-image: url("/static/images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  color: white;
   margin: 0;
   padding: 40px 20px;
 }
@@ -19,7 +23,7 @@ h1 {
 form {
   max-width: 500px;
   margin: auto;
-  background-color: #ffffff;
+  background-color: #ffffffd0; /* slight transparency */
   padding: 25px;
   border: 2px solid #003049;
   border-radius: 12px;
@@ -70,7 +74,7 @@ ul {
 }
 
 li {
-  background-color: #ffffff;
+  background-color: #ffffffd0; /* translucent white */
   padding: 15px;
   margin-bottom: 10px;
   border-left: 6px solid #d62828;
