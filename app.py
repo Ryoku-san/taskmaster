@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import os
+import json
 import datetime
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
@@ -7,12 +8,12 @@ from google.oauth2.credentials import Credentials
 
 app = Flask(__name__)
 app.secret_key = "taskmaster_secret_key"
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"  # Only for development
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"  # Remove for production
 
-# File downloaded from Google Cloud Console
-CLIENT_SECRETS_FILE = "client_secret.json"
+# Load credentials from environment variable (Render safe)
+CLIENT_CONFIG = json.loads(os.environ["GOOGLE_CREDS_JSON"])
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
-REDIRECT_URI = "http://localhost:5000/oauth2callback"  # update for Render if needed
+REDIRECT_URI = "https://taskmaster-wweg.onrender.com/oauth2callback"
 
 @app.route("/")
 def home():
@@ -23,24 +24,25 @@ def add_task():
     title = request.form.get("title")
     time = request.form.get("time")
 
-    # Save to session so we can use it after OAuth
     session["new_task"] = {"title": title, "time": time}
 
-    # Start OAuth flow
-    flow = Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE,
+    flow = Flow.from_client_config(
+        CLIENT_CONFIG,
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI
     )
-    auth_url, state = flow.authorization_url(access_type='offline', include_granted_scopes='true')
+    auth_url, state = flow.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true'
+    )
     session['state'] = state
     return redirect(auth_url)
 
 @app.route("/oauth2callback")
 def oauth2callback():
     state = session['state']
-    flow = Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE,
+    flow = Flow.from_client_config(
+        CLIENT_CONFIG,
         scopes=SCOPES,
         state=state,
         redirect_uri=REDIRECT_URI
@@ -86,4 +88,4 @@ def credentials_to_dict(creds):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=False, host="0.0.0.0", port=port)
