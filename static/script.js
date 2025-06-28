@@ -5,9 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   renderTasks();
 
-  taskForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
     const title = document.getElementById("title").value;
     const time = document.getElementById("time").value;
     const reminder = document.getElementById("reminder").checked;
