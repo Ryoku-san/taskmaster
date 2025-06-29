@@ -1,36 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TaskMaster</title>
-  <meta name="author" content="SOTA-Tek">
-  <meta name="copyright" content="&copy; 2025 SOTA-Tek">
-  <meta name="description" content="TaskMaster – A smart event tracker built by SOTA-Tek. Add tasks, set reminders, and sync with Google Calendar.">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="icon" href="https://img.icons8.com/color/48/000000/task.png">
+  <meta name="author" content="SOTA-Tek" />
+  <meta name="copyright" content="&copy; 2025 SOTA-Tek" />
+  <meta name="description" content="TaskMaster – A smart event tracker built by SOTA-Tek. Add tasks, set reminders, and sync with Google Calendar." />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/task.png" />
 </head>
 <body>
+  <!-- Navigation -->
+<nav class="top-nav" id="navbar">
+  <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <ul>
+    <li><a href="/">🏠 Home</a></li>
+    <li><a href="#taskForm">➕ Add Task</a></li>
+    <li><a href="/create_event">📅 Sync</a></li>
+    <li><a href="/about">ℹ️ About</a></li>
+    <li><a href="/contact">✉️ Contact</a></li>
+  </ul>
+</nav>
+
+
+  <!-- Header -->
   <h1>
-    TaskMaster 
-    <small style="font-size: 1rem; color: #666;">by SOTA-Tek</small>
+    TaskMaster
+    <small style="font-size: 1rem; color: #eee;">by SOTA-Tek</small>
   </h1>
 
+  <!-- Task Form -->
   <form id="taskForm" method="POST" action="/add-task">
-    <input type="text" name="title" id="title" placeholder="Task Title" required><br>
-    <input type="datetime-local" name="time" id="time" required><br>
-    <label><input type="checkbox" name="reminder" id="reminder"> Set Reminder</label><br>
+    <input type="text" name="title" id="title" placeholder="Task Title" required /><br />
+    <input type="datetime-local" name="time" id="time" required /><br />
+    <label><input type="checkbox" name="reminder" id="reminder" /> Set Reminder</label><br />
     <button type="submit">Add Task to Google Calendar</button>
   </form>
 
+  <!-- Task List -->
   <ul id="taskList"></ul>
 
   <!-- Footer -->
-  <footer style="text-align: center; margin-top: 40px; font-size: 0.9rem; color: #888;">
+  <footer>
     Developed with ❤️ by <strong>SOTA-Tek</strong> &copy; 2025
   </footer>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <script>
+  function toggleMenu() {
+    document.getElementById("navbar").classList.toggle("active");
+  }
+</script>
 </body>
 </html>

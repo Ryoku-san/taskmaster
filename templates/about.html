@@ -1,0 +1,15 @@
+<!-- templates/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - TaskMaster</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  <h1>About TaskMaster</h1>
+  <p>This app was proudly built by <strong>SOTA-Tek</strong> to help you manage your tasks and sync them with Google Calendar.</p>
+  <a href="/">← Back to Home</a>
+</body>
+</html>
