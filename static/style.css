@@ -66,7 +66,7 @@ button:hover {
 }
 
 /* Task List */
-ul {
+ul#taskList {
   list-style-type: none;
   padding: 0;
   max-width: 500px;
@@ -86,31 +86,77 @@ li {
 /* Navigation Menu */
 .top-nav {
   background-color: #003049;
-  padding: 10px 0;
-  text-align: center;
+  padding: 10px 20px;
+  color: white;
   margin-bottom: 30px;
 }
 
-.top-nav ul {
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-.top-nav li {
+.menu li {
   display: inline;
-  margin: 0 15px;
 }
 
-.top-nav a {
+.menu a {
   color: #fcbf49;
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
 }
 
-.top-nav a:hover {
+.menu a:hover {
   color: white;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  #menu-toggle:checked + .menu-icon + .menu {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+    color: #fcbf49;
+  }
+
+  .menu li {
+    margin-bottom: 10px;
+  }
 }
 
 /* Footer */
@@ -119,40 +165,4 @@ footer {
   margin-top: 40px;
   font-size: 0.9rem;
   color: #eeeeee;
-}
-
-/* Mobile Menu */
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #fcbf49;
-  background: none;
-  border: none;
-  margin: 10px;
-}
-
-@media (max-width: 768px) {
-  .top-nav ul {
-    display: none;
-    flex-direction: column;
-    background-color: #003049;
-    margin: 0;
-    padding: 0;
-  }
-
-  .top-nav.active ul {
-    display: flex;
-  }
-
-  .top-nav li {
-    display: block;
-    margin: 10px 0;
-  }
-
-  .menu-toggle {
-    display: block;
-    text-align: right;
-    width: 100%;
-  }
 }
